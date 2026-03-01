@@ -129,7 +129,19 @@ GET https://mysticx.ai/api/v1/openclaw/cards?suit=major&lang=en
 | `suit` | string | —       | Filter by suit: `major`, `wands`, `cups`, `swords`, `pentacles` |
 | `lang` | string | `en`    | Locale code                                                  |
 
-Returns an array of `{ id, name, suit, rank, arcana, imageUrl }`.
+Returns an object containing `suit`, `lang`, and a `cards` array of `{ id, name, suit, rank, arcana, imageUrl }`.
+
+Response shape:
+
+```json
+{
+  "suit": "major",
+  "lang": "en",
+  "cards": [
+    { "id": "major_0", "name": "The Fool", "suit": "major", "rank": "0", "arcana": "major", "imageUrl": "https://..." }
+  ]
+}
+```
 
 ### Get card details
 
@@ -151,7 +163,17 @@ Use these endpoints when the user asks to learn about a specific card or browse 
 GET https://mysticx.ai/api/v1/openclaw/spreads?lang=en
 ```
 
-Returns `{ slug, name, description, cardsCount }` for each of the 13 spreads.
+Returns an object with a `spreads` array, each containing `{ slug, name, description, cardsCount }`.
+
+Response shape:
+
+```json
+{
+  "spreads": [
+    { "slug": "three-card", "name": "Three Card Spread", "description": "...", "cardsCount": 3 }
+  ]
+}
+```
 
 ### Get spread details
 
