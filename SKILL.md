@@ -77,6 +77,42 @@ GET /draw?spread=celtic-cross&lang=zh_CN
 
 # Single card in Japanese
 GET /draw?lang=ja
+
+# Yes or No spread with a question
+GET /draw?spread=yes-or-no&question=Should%20I%20accept%20the%20job%20offer%3F
+
+# Daily tarot card
+GET /draw?spread=daily-tarot
+
+# Love reading in Spanish
+GET /draw?spread=love-simple&lang=es
+
+# Deep love spread with a question
+GET /draw?spread=love-deep&question=What%20does%20the%20future%20hold%20for%20my%20relationship%3F
+
+# Shadow work spread
+GET /draw?spread=shadow-work
+
+# Two Path Choice with a question
+GET /draw?spread=two-path-choice&question=Should%20I%20move%20abroad%20or%20stay%20home%3F
+
+# Obstacle/Key spread in French
+GET /draw?spread=obstacle-key&lang=fr
+
+# Twin Flame Mirror spread
+GET /draw?spread=twin-flame-mirror
+
+# Inner Child Healing in Korean
+GET /draw?spread=inner-child-healing&lang=ko
+
+# Relationship Compass with a question in German
+GET /draw?spread=relationship-compass&question=Wie%20kann%20ich%20meine%20Beziehung%20verbessern%3F&lang=de
+
+# Draw 5 random cards (no spread layout)
+GET /draw?count=5
+
+# Draw 3 random cards in Arabic
+GET /draw?count=3&lang=ar
 ```
 
 (Prepend `https://mysticx.ai/api/v1/openclaw` to each path.)
@@ -129,6 +165,27 @@ GET https://mysticx.ai/api/v1/openclaw/cards?suit=major&lang=en
 | `suit` | string | —       | Filter by suit: `major`, `wands`, `cups`, `swords`, `pentacles` |
 | `lang` | string | `en`    | Locale code                                                  |
 
+#### Example requests
+
+```
+# All Major Arcana cards
+GET /cards?suit=major
+
+# Cups suit in Japanese
+GET /cards?suit=cups&lang=ja
+
+# Swords suit in Spanish
+GET /cards?suit=swords&lang=es
+
+# Pentacles suit
+GET /cards?suit=pentacles
+
+# Wands suit in Portuguese
+GET /cards?suit=wands&lang=pt
+```
+
+(Prepend `https://mysticx.ai/api/v1/openclaw` to each path.)
+
 Returns an object containing `suit`, `lang`, and a `cards` array of `{ id, name, suit, rank, arcana, imageUrl }`.
 
 Response shape:
@@ -149,6 +206,38 @@ Response shape:
 GET https://mysticx.ai/api/v1/openclaw/cards/{cardId}?lang=en
 ```
 
+#### Example requests
+
+```
+# The Fool (Major Arcana)
+GET /cards/major_0
+
+# The Tower
+GET /cards/major_16
+
+# Ace of Cups
+GET /cards/cups_1
+
+# Ten of Swords in French
+GET /cards/swords_10?lang=fr
+
+# Queen of Pentacles in Chinese
+GET /cards/pentacles_13?lang=zh_CN
+
+# King of Wands in Korean
+GET /cards/wands_14?lang=ko
+
+# The Lovers
+GET /cards/major_6
+
+# Page of Cups in Arabic
+GET /cards/cups_11?lang=ar
+```
+
+(Prepend `https://mysticx.ai/api/v1/openclaw` to each path.)
+
+Card IDs follow the pattern `{suit}_{rank}` — e.g. `major_0` (The Fool), `cups_1` (Ace of Cups), `swords_14` (King of Swords).
+
 Returns the full card object including name, description, upright/reversed meanings, keywords, and yes-or-no verdict with strength.
 
 Use these endpoints when the user asks to learn about a specific card or browse cards by suit — no need to draw.
@@ -162,6 +251,21 @@ Use these endpoints when the user asks to learn about a specific card or browse 
 ```
 GET https://mysticx.ai/api/v1/openclaw/spreads?lang=en
 ```
+
+#### Example requests
+
+```
+# All spreads in English
+GET /spreads
+
+# All spreads in Japanese
+GET /spreads?lang=ja
+
+# All spreads in Spanish
+GET /spreads?lang=es
+```
+
+(Prepend `https://mysticx.ai/api/v1/openclaw` to each path.)
 
 Returns an object with a `spreads` array, each containing `{ slug, name, description, cardsCount }`.
 
@@ -180,6 +284,33 @@ Response shape:
 ```
 GET https://mysticx.ai/api/v1/openclaw/spreads/{slug}?lang=en
 ```
+
+#### Example requests
+
+```
+# Three Card Spread details
+GET /spreads/three-card
+
+# Celtic Cross in Chinese
+GET /spreads/celtic-cross?lang=zh_CN
+
+# Love Deep spread in French
+GET /spreads/love-deep?lang=fr
+
+# Shadow Work spread details
+GET /spreads/shadow-work
+
+# Twin Flame Mirror in Korean
+GET /spreads/twin-flame-mirror?lang=ko
+
+# Two Path Choice spread details
+GET /spreads/two-path-choice
+
+# Yes or No spread in German
+GET /spreads/yes-or-no?lang=de
+```
+
+(Prepend `https://mysticx.ai/api/v1/openclaw` to each path.)
 
 Returns the full spread with positions: `{ id, slug, name, description, cardsCount, layoutImageUrl, positions: [{ order, name, description, isMainCard }] }`.
 
